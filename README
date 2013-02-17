@@ -14,21 +14,20 @@ ZOMBIE-NET
               /o   __\     but lack access to the interwebs.
              / '     |                        
             / /      |                                                   
-           /_/\______|     Just run ~$ node zombie.js
+           /_/\______|     Just run ~$ node zombie
           (   _(    <                                                    
-           \    \    \     then visit http://localhost:9876                    
-            \    \    |    
+           \    \    \                  
+            \    \    |    Then visit http://localhost:9876   
              \____\____\                          
              ____\_\__\_\  
-
 
 
 
 ZOMBIE WARNING
 --------------
 
-This is just a proof of concept. Use at own risk - it may eat your brain.
+This is just a proof of concept made in a day at campJS on the Gold Coast <http://campjs.com>. Use at own risk - it may eat your brain.
 
-Copyright 2013 Dave Kinkead & Ben Davies - MIT License
+Copyright 2013 Dave Kinkead - MIT License
 
 Art source: http://www.asciiartfarts.com/zombie.html                          
