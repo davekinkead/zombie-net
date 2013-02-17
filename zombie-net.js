@@ -8,6 +8,7 @@ var http = require('http');
 
 //	list of local IPs
 var ips = [];
+var host = '255.255.255.255'
 
 //	create socket
 var server = dgram.createSocket('udp4');
@@ -47,8 +48,10 @@ server.on("message", function (msg, rinfo) {
 //	start listening
 server.on("listening", function () {
 	var address = server.address();
+	console.log(address);
   console.log("Lstening for IP broadcasts on " + address.address + ":" + address.port);
 });
+
 
 server.bind(2267);
 
@@ -57,7 +60,8 @@ function broadcast() {
 	setTimeout(broadcast, 2000);	
 		
 	var message = new Buffer(addresses[0] + ':' + zombieName);
-	server.send(message, 0, message.length, 2267, "localhost");
+	server.setBroadcast(true);
+	server.send(message, 0, message.length, 2267, host); 	// 10.10.2.255
 }
 broadcast();
 
