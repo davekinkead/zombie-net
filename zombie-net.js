@@ -47,11 +47,15 @@ module.exports = (function(){
         });
 
         if (!found) {
+          var client = info;
+          client.present = 1;
+
           console.log(info.name + " is staking on '" + info.ip + "'");
-          ips.push({ip: info.ip, name: info.name, present: 1});
+          ips.push(client);
         } else {
           console.log("Ignoring: '" + info.ip + "'");
           found.present = 1;
+          found.resources = info.resources;
         }
 
       } catch (err) {
@@ -120,8 +124,22 @@ module.exports = (function(){
       request.on('end', function() {
 
 	//	view setup
-	var view = {ips: ips};
+        var resources = [];
+
+        _.each(ips, function(ip) {
+          _.each(ip.resources, function(resource) {
+            var r = {};
+            r.zombie = ip.name;
+            r.name = resource.name;
+            r.key = resource.key;
+            r.ip = ip.ip;
+            resources.push(r);
+          });
+        });
+
+	var view = {ips: ips, resources: resources};
 	var template = 'index.html';
+
 
 	//	write response headers
 	response.writeHead(200, {
