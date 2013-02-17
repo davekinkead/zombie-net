@@ -127,14 +127,18 @@ module.exports = (function(){
         var resources = [];
 
         _.each(ips, function(ip) {
-          _.each(ip.resources, function(resource) {
-            var r = {};
-            r.zombie = ip.name;
-            r.name = resource.name;
-            r.key = resource.key;
-            r.ip = ip.ip;
-            resources.push(r);
-          });
+          if (ip && ip.resources) {
+            _.each(ip.resources, function(resource) {
+              if (resource.name[0] != '.') {
+                var r = {};
+                r.zombie = ip.name;
+                r.name = resource.name;
+                r.key = resource.key;
+                r.ip = ip.ip;
+                resources.push(r);
+              }
+            });
+          }
         });
 
 	var view = {ips: ips, resources: resources};
