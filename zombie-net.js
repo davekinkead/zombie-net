@@ -27,25 +27,24 @@ var zombieNet = (function(){
 	        }
 	    }
 	}
-	
+
 	var prowler = function() {
 		//	create socket
 		var server = dgram.createSocket('udp4');
 
 		//	message event
 		server.on("message", function (msg, rinfo) {
-			console.log('Found: ' + msg);	
 			var bits = msg.toString().split(':');
-			ips.push({ip: bits[0], name: bits[1]});
-	
-			//	ensure uniquness of zombie IPs
-			var keys = [];
-			_.each(ips, function() {
-				if (_.contains(keys, ips.ip)) {
-					ips.pop();
-				}
-				keys.push(ips.ip);
-			});
+
+                  var found = _.find(ips, function(ip) {
+
+                    return (ip.ip == bits[0]);
+                  });
+
+                  if (!found) {
+                    console.log("Adding: '" + bits[0] + "'");
+                    ips.push({ip: bits[0], name: bits[1]});
+                  }
 		});
 
 		//	start listening
@@ -58,8 +57,13 @@ var zombieNet = (function(){
 
 		//	broadcast own IP to local network
 		function broadcast() {
+<<<<<<< HEAD
 			setTimeout(broadcast, 10000);	
 		
+=======
+			setTimeout(broadcast, 2000);
+
+>>>>>>> 8fc35240571e26b751325634f56591c90354e9a6
 			var message = new Buffer(addresses[0] + ':' + zombieName);
 			server.setBroadcast(true);
 			server.send(message, 0, message.length, port, host);
@@ -70,29 +74,29 @@ var zombieNet = (function(){
 	//	create server and listen on 9876
 	var httpServer = function() {
 		http.createServer(function(request, response) {
-		
+
 			//	add request listner
 			request.on('end', function() {
-		
+
 				//	view setup
 				var view = {ips: ips};
 				var template = 'index.html';
-		
+
 				//	write response headers
 				response.writeHead(200, {
 					'Content-Type': 'text/html'
 				});
-		
+
 				//	send respose
 				fs.readFile(template, function(err, template) {
 					response.end(Mustache.to_html(template.toString(), view));
 				});
-			});	
+			});
 		}).listen(9876);
 
 		console.log('Sssshhhh!, There are zombies on localhost:9876');
 	}
-	
+
   return {
    serve: httpServer(),
 	 prowl: prowler(),
