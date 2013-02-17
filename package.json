@@ -1,26 +1,13 @@
 {
-  "name": "zombie-net",
-  "version": "0.0.0",
-  "description": "A brain eating distributed network for post apocalypse interwebs",
-  "author": "Dave Kinkead",
-  "license": "MIT",
-  "readmeFilename": "README",
-  "main": "zombie-net.js",
-	"dependencies": {
-		"mustache": "*",
-		"underscore": "~1.4.4"
-	},
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/davekinkead/zombie-net"
-  },
-  "keywords": [
-    "network",
-    "zombie",
-    "LAN"
-  ],
-  "gitHead": "1f1387766500e270edefa1b23dacd419ba0dc814"
+  "dependencies": {
+    "express": "3.1.0",
+    "jade": "*",
+    "less-middleware": "*"
+  }
 }

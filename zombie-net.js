@@ -1,4 +1,4 @@
-var zombieNet = (function(){
+module.exports = (function(){
 
   // 	Packages
   var _ = require('underscore');
@@ -7,6 +7,7 @@ var zombieNet = (function(){
   var dgram = require('dgram');
   var http = require('http');
   var os = require('os')
+  var crypto = require('crypto');
 
   //	Important zombie variables
   var ips = [];
@@ -73,12 +74,20 @@ var zombieNet = (function(){
 
       info.name = zombieName;
       info.ip = addresses[0];
+      info.resources = [];
 
       // Get list of local resources here.
-      info.resources = [
-        { name: "file 1", key: "SHA of file 1" },
-        { name: "file 2", key: "SHA of file 2" }
-      ];
+      var files = fs.readdirSync(__dirname + "/public");
+
+      _.each(files, function(file) {
+        var data = fs.readFileSync(__dirname + "/public/" + file);
+
+        var shasum = crypto.createHash('sha1');
+        shasum.update(data);
+        var sha = shasum.digest('hex');
+
+        info.resources.push({name: file, key: sha});
+      });
 
       var message = new Buffer(JSON.stringify(info));
 
@@ -89,7 +98,7 @@ var zombieNet = (function(){
 
     // Remove all remote clients that we haven't heard from.
     setInterval(function() {
-			
+
 			ips = _.compact(ips);
       _.each(ips, function(ip, i) {
         if (!ip.present) {
@@ -129,8 +138,12 @@ var zombieNet = (function(){
     console.log('Sssshhhh!, There are zombies on localhost:9876');
   };
 
+  var show = function() {
+
+  };
+
   return {
-    serve: httpServer(),
-    prowl: prowler(),
+    serve: httpServer,
+    prowl: prowler
   };
 })();
