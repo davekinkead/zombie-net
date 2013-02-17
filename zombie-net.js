@@ -31,8 +31,17 @@ for (k in interfaces) {
 //	message event
 server.on("message", function (msg, rinfo) {
 	console.log('Found: ' + msg);	
-	ips.push({ip: msg+''});
-	ips = _.uniq(ips);
+	var bits = msg.toString().split(':');
+	ips.push({ip: bits[0], name: bits[1]});
+	
+	//	ensure uniquness
+	var keys = [];
+	_.each(ips, function() {
+		if (_.contains(keys, ips.ip)) {
+			ips.pop();
+		}
+		keys.push(ips.ip);
+	});
 });
 
 //	start listening
@@ -47,7 +56,7 @@ server.bind(2267);
 function broadcast() {
 	setTimeout(broadcast, 2000);	
 		
-	var message = new Buffer(addresses[0] + ' - ' + zombieName);
+	var message = new Buffer(addresses[0] + ':' + zombieName);
 	server.send(message, 0, message.length, 2267, "localhost");
 }
 broadcast();

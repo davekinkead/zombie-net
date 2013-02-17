@@ -2,12 +2,29 @@
 <head>
 	<title>Camp JS Zombie-Net | Braaaiiiiiinnnnnnsssss</title>
   <style type="text/css">
-		.aside { display: inline-block; float: left;}
+		body { background: #333; color: #DDD; font-family: Helvetica, Arial, sans-serif; }
+		footer pre { float: right; }
+		footer p { clear: both; text-align: center; }
 	</style>
 </head>
 <body>
 	<h1>Zombie-Net</h1>
-	<pre class="aisde">
+
+	<section class="resources">
+		<h2>Zombie Resources</h2>
+	</section>
+
+	<section class="ips">
+		<h2>Zombie IPs</h2>
+		{{#ips}}
+		<ul>
+			<li>{{name}} <em>{{ip}}</em></li>
+		</ul>
+		{{/ips}}
+	</section>
+
+	<footer>
+		<pre>
                   .....                                                  
                  C C  /                                                  
                 /<   /     
@@ -25,12 +42,8 @@
             \    \    |    
              \____\____\                          
              ____\_\__\_\  
-	</pre>	
-	{{#ips}}
-	<ul>
-		<li>{{ip}}</li>
-	</ul>
-	{{/ips}}
-
+		</pre>
+		<p>Zombie-Net (C) Dave Kinkead 2013<p>
+	</footer>	
 </body>
 </html>
