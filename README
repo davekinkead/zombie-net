@@ -14,9 +14,9 @@ ZOMBIE-NET
               /o   __\     but lack access to the interwebs.
              / '     |                        
             / /      |                                                   
-           /_/\______|     Just run ~$ node zombie-net.js
+           /_/\______|     Just run ~$ node zombie.js
           (   _(    <                                                    
-           \    \    \                                                   
+           \    \    \     then visit http://localhost:9876                    
             \    \    |    
              \____\____\                          
              ____\_\__\_\  
