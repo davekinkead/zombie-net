@@ -13,7 +13,7 @@ var zombieNet = (function(){
 	var host = '255.255.255.255';
 	var port = '27246';
 	var adjectives = ['Moaning', 'Hungry', 'Decomposing', 'Green', 'Deathly', 'Evil', 'Nasty', 'Brainless', 'Crazy', 'Horrible', 'Sloppy'];
-	var names = ['Bob', 'Katey', 'Harry', 'Pete', 'Dave', 'Sam', 'Eugene', 'Sally', 'Geoff', 'Nigel', 'Anton'];
+	var names = ['Bob', 'Katey', 'Harry', 'Pete', 'Dave', 'Sam', 'Eugene', 'Sally', 'Geoff', 'Nigel', 'Anton', 'Ben'];
 	var zombieName = adjectives[_.random(adjectives.length)] + ' ' + names[_.random(names.length)];
 
 	//	get local gateway IP & Zombie name
