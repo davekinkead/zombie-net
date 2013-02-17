@@ -49,11 +49,9 @@ module.exports = (function(){
         if (!found) {
           var client = info;
           client.present = 1;
-
-          console.log(info.name + " is staking on '" + info.ip + "'");
+          console.log(info.name + " is stalking on '" + info.ip + "'");
           ips.push(client);
         } else {
-          console.log("Ignoring: '" + info.ip + "'");
           found.present = 1;
           found.resources = info.resources;
         }
@@ -106,7 +104,7 @@ module.exports = (function(){
 			ips = _.compact(ips);
       _.each(ips, function(ip, i) {
         if (!ip.present) {
-          console.log(ip.name + " ate some brains on (ip " + ip.ip + ")");
+          console.log(ip.name + " '" + ip.ip + "' bit the dust");
           ips[i] = null;
         } else {
           ip.present = 0;
