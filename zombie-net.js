@@ -57,13 +57,8 @@ var zombieNet = (function(){
 
 		//	broadcast own IP to local network
 		function broadcast() {
-<<<<<<< HEAD
 			setTimeout(broadcast, 10000);	
-		
-=======
-			setTimeout(broadcast, 2000);
 
->>>>>>> 8fc35240571e26b751325634f56591c90354e9a6
 			var message = new Buffer(addresses[0] + ':' + zombieName);
 			server.setBroadcast(true);
 			server.send(message, 0, message.length, port, host);
