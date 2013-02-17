@@ -49,6 +49,7 @@ var zombieNet = (function(){
           console.log(info.name + " is staking on '" + info.ip + "'");
           ips.push({ip: info.ip, name: info.name, present: 1});
         } else {
+          console.log("Ignoring: '" + info.ip + "'");
           found.present = 1;
         }
 
@@ -66,7 +67,7 @@ var zombieNet = (function(){
     server.bind(port);
 
     //	broadcast own IP to local network
-    setTimeout(function() {
+    setInterval(function() {
 
       var info = {};
 
@@ -87,9 +88,11 @@ var zombieNet = (function(){
     }, pingTime);
 
     // Remove all remote clients that we haven't heard from.
-    setTimeout(function() {
+    setInterval(function() {
+
       _.each(ips, function(ip, i) {
         if (!ip.present) {
+          console.log(ip.name + " got chewed by a zombie (ip " + ip.ip + ")");
           ips[i] = null;
         }
       });
