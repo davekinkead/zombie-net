@@ -14,12 +14,13 @@ ZOMBIE-NET
               /o   __\     but lack access to the interwebs.
              / '     |                        
             / /      |                                                   
-           /_/\______|     Just run ....
+           /_/\______|     Just run ~$ node zombie-net.js
           (   _(    <                                                    
            \    \    \                                                   
             \    \    |    
              \____\____\                          
              ____\_\__\_\  
+
 
 
 
