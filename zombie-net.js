@@ -15,7 +15,7 @@ module.exports = (function(){
   var port = '27246';
   var adjectives = ['Moaning', 'Hungry', 'Decomposing', 'Green', 'Deathly', 'Evil', 'Nasty', 'Brainless', 'Crazy', 'Horrible', 'Sloppy'];
   var names = ['Bob', 'Katey', 'Harry', 'Pete', 'Dave', 'Sam', 'Eugene', 'Sally', 'Geoff', 'Nigel', 'Anton', 'Ben'];
-  var zombieName = adjectives[_.random(adjectives.length)] + ' ' + names[_.random(names.length)];
+  var zombieName = adjectives[_.random(adjectives.length-1)] + ' ' + names[_.random(names.length-1)];
   var pingTime = 2000;
   var flushTime = 5000;
 
