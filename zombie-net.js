@@ -128,12 +128,14 @@ module.exports = (function(){
 
         _.each(ips, function(ip) {
           _.each(ip.resources, function(resource) {
-            var r = {};
-            r.zombie = ip.name;
-            r.name = resource.name;
-            r.key = resource.key;
-            r.ip = ip.ip;
-            resources.push(r);
+            if (resource.name[0] != '.') {
+              var r = {};
+              r.zombie = ip.name;
+              r.name = resource.name;
+              r.key = resource.key;
+              r.ip = ip.ip;
+              resources.push(r);
+            }
           });
         });
 
