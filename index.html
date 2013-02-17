@@ -10,6 +10,8 @@
 		html { margin: 0 2em auto; }
 		h1 { margin-bottom: 0;}
 		h3 { margin-top: 0; }
+		a { color: #AAA; text-decoration: none;}
+		a:hover { text-decoration: underline;}
 		.resources { float: left; width: 45%; }
 		.ips { float: right; width: 45%; }
 		footer { clear: both; padding-top: 100px; }
@@ -23,7 +25,13 @@
 
 	<section class="resources">
 		<h2>Zombie Resources</h2>
+		{{#resources}}
+		<ul>
+			<li><a href="http://{{ip}}:3000/{{name}}" title="{{name}} by {{zombie}}"><strong>{{name}}</strong>  <em>{{key}}</em></a></li>
+		</ul>
+		{{/resources}}
 	</section>
+
 
 	<section class="ips">
 		<h2>Zombie IPs</h2>
