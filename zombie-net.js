@@ -90,7 +90,7 @@ var zombieNet = (function(){
     // Remove all remote clients that we haven't heard from.
     setInterval(function() {
 			
-			ips = _compact(ips);
+			ips = _.compact(ips);
       _.each(ips, function(ip, i) {
         if (!ip.present) {
           console.log(ip.name + " ate some brains on (ip " + ip.ip + ")");
