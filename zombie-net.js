@@ -68,12 +68,16 @@ var zombieNet = (function(){
     //	broadcast own IP to local network
     setTimeout(function() {
 
-      console.log("Broadcast");
       var info = {};
 
       info.name = zombieName;
       info.ip = addresses[0];
-      info.resource = "resource here please";
+
+      // Get list of local resources here.
+      info.resources = [
+        { name: "file 1", key: "SHA of file 1" },
+        { name: "file 2", key: "SHA of file 2" }
+      ];
 
       var message = new Buffer(JSON.stringify(info));
 
@@ -117,10 +121,10 @@ var zombieNet = (function(){
     }).listen(9876);
 
     console.log('Sssshhhh!, There are zombies on localhost:9876');
-  }
+  };
 
   return {
     serve: httpServer(),
     prowl: prowler(),
-  }
+  };
 })();
