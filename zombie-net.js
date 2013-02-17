@@ -1,17 +1,24 @@
 // 	helpers
 var _ = require('underscore');
+var Mustache = require('mustache')
+var fs = require('fs')
+var dgram = require('dgram');
+var http = require('http');
+
 
 //	list of local IPs
 var ips = [];
 
 //	create socket
-var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
 
-//	get local gateway IP
+//	get local gateway IP & Zombie name
 var os = require('os')
 var interfaces = os.networkInterfaces();
 var addresses = [];
+var adjectives = ['Moaning', 'Hungry', 'Decomposing', 'Green', 'Deathly', 'Evil', 'Nasty', 'Brainless', 'Crazy', 'Horrible'];
+var names = ['Bob', 'Katey', 'Harry', 'Pete', 'Dave', 'Sam', 'Eugene', 'Sally', 'Geoff', 'Nigel', 'Anton'];
+var zombieName = adjectives[_.random(adjectives.length)] + ' ' + names[_.random(names.length)];
 for (k in interfaces) {
     for (k2 in interfaces[k]) {
         var address = interfaces[k][k2];
@@ -23,7 +30,7 @@ for (k in interfaces) {
 
 //	message event
 server.on("message", function (msg, rinfo) {
-	console.log('Found: ' + msg);
+	console.log('Found: ' + msg);	
 	ips.push({ip: msg+''});
 	ips = _.uniq(ips);
 });
@@ -38,34 +45,32 @@ server.bind(2267);
 
 //	broadcast own IP to local network
 function broadcast() {
-	setTimeout(broadcast, 10000);	
+	setTimeout(broadcast, 2000);	
 		
-	var message = new Buffer(addresses[0]);
+	var message = new Buffer(addresses[0] + ' - ' + zombieName);
 	server.send(message, 0, message.length, 2267, "localhost");
 }
 broadcast();
 
 //	create server and listen on 2268
-var http = require('http');
-var Mustache = require('mustache')
-
 http.createServer(function(request, response) {
 		
 	//	add request listner
 	request.on('end', function() {
-			
-		//	write response headers
-		var view = {ips: ips};
-		console.log(ips);
-		var template = '<!DOCTYPE html><head></head><body><h1>Camp Net</h1>{{#ips}}<ul><li>{{ip}}</ul>{{/ips}}</body></html>';
-		console.log(ips);
 		
+		//	view setup
+		var view = {ips: ips};
+		var template = 'index.html';
+		
+		//	write response headers
 		response.writeHead(200, {
 			'Content-Type': 'text/html'
 		});
 		
 		//	send respose
-		response.end(Mustache.to_html(template, view));
+		fs.readFile(template, function(err, template) {
+			response.end(Mustache.to_html(template.toString(), view));
+		});
 	});	
 	
 }).listen(2268);

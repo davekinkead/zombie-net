@@ -1,4 +1,7 @@
 ZOMBIE-NET
+----------
+
+
 
                   .....                                                  
                  C C  /                                                  
@@ -8,16 +11,23 @@ ZOMBIE-NET
 \ ) \ )_      \o     \       
 /|\ /|\       |'     |                 
               |     _|     Use whenever you have a network
-              /o   __\		 but lack access to the interwebs.
+              /o   __\     but lack access to the interwebs.
              / '     |                        
             / /      |                                                   
-           /_/\______|                                                   
+           /_/\______|     Just run ....
           (   _(    <                                                    
            \    \    \                                                   
             \    \    |    
              \____\____\                          
              ____\_\__\_\  
-		
-		
-				 
+
+
+
+ZOMBIE WARNING
+--------------
+
+This is just a proof of concept. Use at own risk - it may eat your brain.
+
+Copyright 2013 Dave Kinkead - MIT License
+
 Art source: http://www.asciiartfarts.com/zombie.html                          
