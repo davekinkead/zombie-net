@@ -16,7 +16,7 @@ var zombieNet = (function(){
   var names = ['Bob', 'Katey', 'Harry', 'Pete', 'Dave', 'Sam', 'Eugene', 'Sally', 'Geoff', 'Nigel', 'Anton', 'Ben'];
   var zombieName = adjectives[_.random(adjectives.length)] + ' ' + names[_.random(names.length)];
   var pingTime = 2000;
-  var flushTime = 10000;
+  var flushTime = 5000;
 
 
   //	get local gateway IP & Zombie name
@@ -94,6 +94,8 @@ var zombieNet = (function(){
         if (!ip.present) {
           console.log(ip.name + " got chewed by a zombie (ip " + ip.ip + ")");
           ips[i] = null;
+        } else {
+          ip.present = 0;
         }
       });
 
