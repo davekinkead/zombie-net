@@ -6,7 +6,9 @@
 var express = require('express')
   , http = require('http')
   , path = require('path')
+  , mkdirp = require('mkdirp')
   , zombie = require('./zombie-net')
+  , publicPath = path.resolve(__dirname, 'public')
 
 var app = express();
 
@@ -21,7 +23,7 @@ app.configure(function(){
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
   app.use(app.router);
-  app.use(require('less-middleware')({ src: __dirname + '/public' }));
+  app.use(require('less-middleware')({ src: publicPath }));
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
@@ -29,8 +31,12 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-http.createServer(app).listen(app.get('port'), function(){
-  zombie.prowl();
-  zombie.serve();
-  console.log("Express server listening on port " + app.get('port'));
+mkdirp(publicPath, function(err) {
+  if (err) return console.log('Unable to create public path, exiting');
+
+  http.createServer(app).listen(app.get('port'), function(){
+    zombie.prowl();
+    zombie.serve();
+    console.log("Express server listening on port " + app.get('port'));
+  });
 });
