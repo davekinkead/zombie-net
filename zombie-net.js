@@ -46,7 +46,7 @@ var zombieNet = (function(){
         });
 
         if (!found) {
-          console.log("Adding: '" + info.ip + "'");
+          console.log(info.name + " is staking on '" + info.ip + "'");
           ips.push({ip: info.ip, name: info.name, present: 1});
         } else {
           found.present = 1;
